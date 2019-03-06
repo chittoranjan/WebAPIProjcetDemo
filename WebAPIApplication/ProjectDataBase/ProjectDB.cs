@@ -12,7 +12,7 @@ namespace WebAPIApplication.ProjectDataBase
         public ProjectDB() : base("DefaultConnection")
         {
             //
-            
+            this.Configuration.LazyLoadingEnabled = true;
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductItem> ProductItems { get; set; }

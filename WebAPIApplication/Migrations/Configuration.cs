@@ -12,7 +12,7 @@ namespace WebAPIApplication.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            
+           
         }
 
         protected override void Seed(WebAPIApplication.ProjectDataBase.ProjectDB context)

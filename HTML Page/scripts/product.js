@@ -7,11 +7,14 @@ $(document).ready(function () {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+           alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
         },
         success: function (data) {
             if (data != undefined && data != null) {
                 createRowForProduct(data);
+            }else{
+                var emptyRow="<tr>"+ "<td 'style:widht=100%'>" +"Data Not Found" +"</td>"+"</tr";
+                $("#ProductListTbl").append(emptyRow);
             }
 
 
@@ -39,5 +42,49 @@ function createRowForProduct(data) {
         var newRow = "<tr id='Product_trItems" + index + "'>" + serialCell + brandNameCell + codeCell + brandDescriptionCell + actionCell + "</tr>";
         $("#ProductListTbl").append(newRow);
 
+    });
+}
+
+function ProductInfoDetails(obj){
+    
+    var id=$(obj).attr("data-id");
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:64609/api/productitem/"+id,
+
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+         },
+         success: function (data) {
+            if (data!=undefined && data!=null) {
+                
+            createRowForEmpAcademicInfo(data);
+            
+          } else {
+            alert("No Data Fount!");
+          }
+        },
+    });
+      
+
+};
+
+function createRowForEmpAcademicInfo(data){
+    var sl=1;
+    $("#LoadProductItme").empty();
+    $.each(data, function ( key,value) {
+
+        
+        var productItemDiv=  '<div class="row">'+  
+        '<div class="col-md-1">'+(sl++)+'</div>'+
+        '<div class="col-md-3">'+value.ProductName+'</div>'+
+        '<div class="col-md-2">'+value.ProductCode+'</div>'+
+        '<div class="col-md-3">'+value.ProductPrice+'</div>'+
+        '<div class="col-md-3">'+value.ProductDescription+'</div>'+
+        '</div>'
+
+        $("#LoadProductItme").append(productItemDiv);
     });
 }
