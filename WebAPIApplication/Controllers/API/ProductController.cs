@@ -21,9 +21,10 @@ namespace WebAPIApplication.Controllers.API
         public IHttpActionResult GetProducts()
         {
             var product= db.Products.ToList();
-            return Ok(product);
+            var result = product.Select(c => new {c.Id, c.BrandName, c.Code, c.BrandDescription});
+            return Ok(result);
         }
-
+        
         // GET: api/Product/5
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)

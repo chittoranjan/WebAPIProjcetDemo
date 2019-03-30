@@ -50,7 +50,7 @@ function ProductInfoDetails(obj){
     var id=$(obj).attr("data-id");
     $.ajax({
         type: "GET",
-        url: "http://localhost:64609/api/productitem/"+id,
+        url: "http://localhost:64609/api/ProductItem/"+id,
 
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
@@ -60,7 +60,7 @@ function ProductInfoDetails(obj){
          success: function (data) {
             if (data!=undefined && data!=null) {
                 
-            createRowForEmpAcademicInfo(data);
+            createRowForProductItemDetails(data);
             
           } else {
             alert("No Data Fount!");
@@ -71,20 +71,18 @@ function ProductInfoDetails(obj){
 
 };
 
-function createRowForEmpAcademicInfo(data){
+function createRowForProductItemDetails(data){
     var sl=1;
     $("#LoadProductItme").empty();
-    $.each(data, function ( key,value) {
-
-        
+  
         var productItemDiv=  '<div class="row">'+  
-        '<div class="col-md-1">'+(sl++)+'</div>'+
-        '<div class="col-md-3">'+value.ProductName+'</div>'+
-        '<div class="col-md-2">'+value.ProductCode+'</div>'+
-        '<div class="col-md-3">'+value.ProductPrice+'</div>'+
-        '<div class="col-md-3">'+value.ProductDescription+'</div>'+
+        '<div class="col-md-1">'+sl+'</div>'+
+        '<div class="col-md-3">'+data.ProductName+'</div>'+
+        '<div class="col-md-2">'+data.ProductCode+'</div>'+
+        '<div class="col-md-3">'+data.ProductPrice+'</div>'+
+        '<div class="col-md-3">'+data.ProductDescription+'</div>'+
         '</div>'
 
         $("#LoadProductItme").append(productItemDiv);
-    });
+    
 }

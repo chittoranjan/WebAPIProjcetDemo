@@ -8,6 +8,6 @@ namespace WebAPIApplication.EFModels
         public string BrandName { get; set; }
         public string Code { get; set; }
         public string BrandDescription { get; set; }
-        public virtual IEnumerable<ProductItem> ProductItems { get; set; }
+        public virtual ICollection<ProductItem> ProductItems { get; set; }
     }
 }
