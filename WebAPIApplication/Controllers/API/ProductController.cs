@@ -35,7 +35,8 @@ namespace WebAPIApplication.Controllers.API
                 return NotFound();
             }
 
-            return Ok(product);
+            var result = product.ProductItems.Select(c => new {c.ProductName,c.ProductCode,c.ProductDescription,c.ProductPrice});
+            return Ok(result);
         }
 
         // PUT: api/Product/5
